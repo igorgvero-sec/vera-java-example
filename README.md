@@ -1,2 +1,2 @@
-# Example Browntown Java
+# Example Java
 
