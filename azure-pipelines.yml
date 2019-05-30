@@ -27,8 +27,8 @@ steps:
 - task: Veracode@2
   inputs:
     ConnectionDetailsSelection: 'Credentials'
-    username: 's'
-    password: 's'
+    vid: '$(VCODE_ID)'
+    vkey: '$(VCODE_KEY)'
     veracodeAppProfile: 'JavaExample'
     version: '$(build.buildNumber)'
     filepath: '/home/vsts/work/1/s/target/example-java-maven-1.0-SNAPSHOT.jar'
