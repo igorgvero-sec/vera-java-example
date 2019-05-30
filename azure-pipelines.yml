@@ -29,7 +29,7 @@ steps:
     ConnectionDetailsSelection: 'Credentials'
     vid: '$(VCODE_ID)'
     vkey: '$(VCODE_KEY)'
-    veracodeAppProfile: 'JavaExample'
+    veracodeAppProfile: 'ADOPSJavaExample'
     version: '$(build.buildNumber)'
     filepath: '/home/vsts/work/1/s/target/example-java-maven-1.0-SNAPSHOT.jar'
     sandboxName: 'AzureDevOps'
