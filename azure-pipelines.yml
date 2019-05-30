@@ -1,0 +1,38 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+    testResultsFiles: '**/TEST-*.xml'
+    goals: 'package'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'curl -sSL https://download.sourceclear.com/ci.sh | sh'
+  env: 
+    SRCCLR_API_TOKEN: $(SRCCLR_API_TOKEN)
+
+- task: Veracode@2
+  inputs:
+    ConnectionDetailsSelection: 'Credentials'
+    username: 's'
+    password: 's'
+    veracodeAppProfile: 'JavaExample'
+    version: '$(build.buildNumber)'
+    filepath: '/home/vsts/work/1/s/target/example-java-maven-1.0-SNAPSHOT.jar'
+    sandboxName: 'AzureDevOps'
+    createSandBox: false
+    createProfile: false
+    scanStatusCheckInterval: '60'
