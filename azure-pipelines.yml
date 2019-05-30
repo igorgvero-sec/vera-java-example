@@ -26,9 +26,7 @@ steps:
 
 - task: Veracode@2
   inputs:
-    ConnectionDetailsSelection: 'Credentials'
-    id: '$(VCODE_ID)'
-    key: '$(VCODE_KEY)'
+    AnalysisService: 'ADOPS-Connection-VCODE'
     veracodeAppProfile: 'ADOPSJavaExample'
     version: '$(build.buildNumber)'
     filepath: '/home/vsts/work/1/s/target/example-java-maven-1.0-SNAPSHOT.jar'
