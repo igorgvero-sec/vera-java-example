@@ -24,7 +24,7 @@ steps:
   env: 
     SRCCLR_API_TOKEN: $(SRCCLR_API_TOKEN)
 
-- task: Veracode@2
+- task: Veracode@3
   inputs:
     AnalysisService: 'ADOPS-Connection-VCODE'
     veracodeAppProfile: 'ADOPSJavaExample'
