@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage("Checkout") {
             steps{
-                git 'https://github.com/m-browntown/vera-java-example.git'
+                git 'https://github.com/igorgvero/vera-java-example.git'
             }
         }
 
