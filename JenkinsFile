@@ -88,7 +88,7 @@ pipeline {
 	                        
 	                        //Create an array of flaws for the current build
 	                        //def parsedResults = new JsonSlurper().parse(new File('/var/lib/jenkins/workspace/VeraInsecurePrivate/./results.json'))
-	                        def parsedResults = new JsonSlurper().parse(new File('/Users/Shared/Jenkins/Home/workspace/VeraDemo-Jenkins/results.json'))
+	                        def parsedResults = new JsonSlurper().parse(new File('results.json'))
 	                        
 
 	                        def flawHashArray = parsedResults.results.TestResults.Issues.Issue.FlawMatch.FlawHash
