@@ -107,7 +107,6 @@ pipeline {
 	            }   
 	        }
 	    }
-	}
 
 
         stage("Veracode Static Analysis") {
