@@ -75,6 +75,41 @@ pipeline {
             }   
         }
 
+	   stage("DevOps Scan") {
+	            steps {
+	                script {
+	                    if(isUnix()) {
+	                        sh label: '', script: 'java -Ddevops.endpoint.url=https://agora-qa-postprod.topaz.veracode.io/devops/v3 -jar devops-scanner-java.jar -i e8ef83f48a01d5993fa337ebbf435b7e -k 3d9dd8deebe633a097c8a442c5b8fe562635fa20aa5088c3003c5e84e423b9c7757ca7b19a0f1ef3f8ff839cfdeda8c3d0841268407c214a92206010793b1328 -ic 5:0,4:0,3:0,2:0,1:0 -j "target/verademo.war"'                        
+	                        
+	                        //Store the results.json as a running artifact?
+	                        
+	                        
+	                        //Create an array of flaws for the current build
+	                        //def parsedResults = new JsonSlurper().parse(new File('/var/lib/jenkins/workspace/VeraInsecurePrivate/./results.json'))
+	                        def parsedResults = new JsonSlurper().parse(new File('/Users/Shared/Jenkins/Home/workspace/VeraDemo-Jenkins/results.json'))
+	                        
+
+	                        def flawHashArray = parsedResults.results.TestResults.Issues.Issue.FlawMatch.FlawHash
+	                        println(flawHashArray) //store this value to track new flaws?
+	                        def flawSeverityArray = parsedResults.results.TestResults.Issues.Issue.Severity
+	                        println(flawSeverityArray) 
+	                        
+	                        //Total flaws of severity 4 and 5
+	                        def disallowedFlawCount = 0
+	                        for (item in flawSeverityArray) {
+	                            if (item.toInteger() > 3) {
+	                                disallowedFlawCount += 1
+	                            }
+	                        }
+	                        println(disallowedFlawCount) //store this to warn on new high severity flaws?
+	                    }
+	                }
+	            }   
+	        }
+	    }
+	}
+
+
         stage("Veracode Static Analysis") {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
