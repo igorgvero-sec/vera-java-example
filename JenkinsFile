@@ -80,6 +80,7 @@ pipeline {
         
 	    stage("DevOps Scan") {
             steps {
+            	/*
                 script {
                     if(isUnix()) {
                         sh label: '', script: 'java -Ddevops.endpoint.url=https://agora-qa-postprod.topaz.veracode.io/devops/v3 -jar devops-scanner-java.jar -i e8ef83f48a01d5993fa337ebbf435b7e -k 3d9dd8deebe633a097c8a442c5b8fe562635fa20aa5088c3003c5e84e423b9c7757ca7b19a0f1ef3f8ff839cfdeda8c3d0841268407c214a92206010793b1328 -ic 5:0,4:0,3:0,2:0,1:0 -j "verademo.war"'                        
@@ -107,27 +108,25 @@ pipeline {
                         println(disallowedFlawCount) //store this to warn on new high severity flaws?
                     }
                 }
+                */
             }   
         }
-	       
     	
-    	//stage("Veracode Static Analysis") {
-        //	steps {
-        //    	withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
-        //        	veracode applicationName: 'JavaExample', criticality: 'VeryHigh', debug: true, fileNamePattern: '', replacementPattern: '', sandboxName: '', scanExcludesPattern: '', scanIncludesPattern: '', scanName: 'Jenkins - Build $buildnumber', teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '**/**.jar', useIDkey: true, vid: env.veracode_id, vkey: env.veracode_key, vpassword: '', vuser: ''
-        //    	}
-        //    }
-        //}
-
-
-        /*
-        stage("Veracode Dynamic Analysis") {
+    	stage("Veracode Static Analysis") {
         	steps {
             	withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
-                	 veracodeDynamicAnalysisResubmit analysisName: 'JavaExample', maximumDuration: 72, vid: env.veracode_id, vkey: env.veracode_key
+                	veracode applicationName: 'JavaExample', criticality: 'VeryHigh', debug: true, fileNamePattern: '', replacementPattern: '', sandboxName: '', scanExcludesPattern: '', scanIncludesPattern: '', scanName: 'Jenkins - Build $buildnumber', teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '**/**.jar', useIDkey: true, vid: env.veracode_id, vkey: env.veracode_key, vpassword: '', vuser: ''
+            	}
+            }
+        }
+
+        stage("Veracode Dynamic Analysis") {
+        	steps {
+            	//withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
+                //	 veracodeDynamicAnalysisResubmit analysisName: 'JavaExample', maximumDuration: 72, vid: env.veracode_id, vkey: env.veracode_key
             	}
         	}
     	}
-    	*/
+    	
     }
 }
