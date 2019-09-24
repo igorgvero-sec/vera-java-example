@@ -120,12 +120,14 @@ pipeline {
         //}
 
 
+        /*
         stage("Veracode Dynamic Analysis") {
         	steps {
             	withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
-                	veracodeDynamicRescan applicationName: 'JavaExample', maximumDuration: 72, vid: env.veracode_id, vkey: env.veracode_key
+                	 veracodeDynamicAnalysisResubmit analysisName: 'JavaExample', maximumDuration: 72, vid: env.veracode_id, vkey: env.veracode_key
             	}
         	}
     	}
+    	*/
     }
 }
