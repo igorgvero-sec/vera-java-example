@@ -123,9 +123,9 @@ pipeline {
 
         stage("Veracode Dynamic Analysis") {
         	steps {
-        		println("PLACEHOLDER")
-            	//withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
-                //	 veracodeDynamicAnalysisResubmit analysisName: 'JavaExample', maximumDuration: 72, vid: env.veracode_id, vkey: env.veracode_key
+            	withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
+                veracodeDynamicAnalysisResubmit analysisName: 'Sample Analysis', maximumDuration: 72, vid: env.veracode_id, vkey: env.veracode_key
+
             }
         }
     }
