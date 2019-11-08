@@ -82,7 +82,7 @@ pipeline {
             steps {
                 script {
                     if(isUnix()) {
-                        sh label: '', script: 'java -Ddevops.endpoint.url=https://agora-qa-postprod.topaz.veracode.io/devops/v3 -jar devops-scanner-java.jar -i e8ef83f48a01d5993fa337ebbf435b7e -k 3d9dd8deebe633a097c8a442c5b8fe562635fa20aa5088c3003c5e84e423b9c7757ca7b19a0f1ef3f8ff839cfdeda8c3d0841268407c214a92206010793b1328 -j "verademo.war"'                        
+                        sh label: '', script: 'java -Ddevops.endpoint.url=https://agora-qa-postprod.topaz.veracode.io/devops/v3 -jar devops-scanner-java.jar -i e8ef83f48a01d5993fa337ebbf435b7e -k 3d9dd8deebe633a097c8a442c5b8fe562635fa20aa5088c3003c5e84e423b9c7757ca7b19a0f1ef3f8ff839cfdeda8c3d0841268407c214a92206010793b1328 -fc 95 -j "verademo.war"'                        
                         
                     	//Create an array of flaws for the current build
                     	def parsedResults = new JsonSlurper().parse(new File('/var/lib/jenkins/workspace/VeraInsecurePrivate/./results.json'))
